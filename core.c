@@ -45,12 +45,33 @@ void core_start_game(void)
 		
 
 
-		terminal_write("Your word is :");
-		terminal_write(showed_word);
+		fprintf(stdout, "your word is %s\n", showed_word);
 		fprintf(stdout, "you have %i try left\n", turn);
 
-		char * answer = terminal_ask("tel me a lettre of try a word !");
+		char * answer = terminal_ask("tel me a lettre of try a word !\n?");
 
+		if(string_get_length(answer) == 1)
+		{
+			// this is a chararcter
+			char character = *answer;
+			int occurences = string_count_character_occurences(answer, character);
+
+			if(occurences > 0)
+			{
+				string_reveal_occurences(hidden_word, character, showed_word);
+				score += occurences;
+			}
+		}
+		else
+		{
+			//this is a word
+			if(string_is_equal(hidden_word, answer))
+			{
+				score = hidden_score;
+			}
+		}
+		
+		
 		//if letter 
 		//	need to detecte if the letter is in the word
 		//	YES => change all "-" by the letter

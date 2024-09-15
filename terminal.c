@@ -1,14 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "./terminal.h"
 #include "./constant.h"
-
-void terminal_write(char * string)
-{
-	fprintf(stdout, "%s\n", string);	
-}
-
 
 char * terminal_ask(char * string)
 {

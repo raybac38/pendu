@@ -30,3 +30,40 @@ char * string_init_word(int size, char value)
 
 }
 
+int string_is_equal(char * string1, char * string2)
+{
+	while(*string1 == *string2 && *string1 != 0 && *string2 != 0)
+	{
+		string1++; string2++;
+	}
+	return *string1 == *string2;
+}
+
+
+int string_count_character_occurences(char * string, char character)
+{
+	int count = 0;
+	while(*string != 0)
+	{
+		if(*string++ == character)
+		{
+			count ++;
+		}
+	}
+	return count;
+}
+
+
+
+void string_reveal_occurences(char * string1, char character, char * string2)
+{
+	while(*string1)
+	{
+		if(*string1 == character)
+		{
+			*string2 = *string1;
+		}
+		string1++; string2++;
+	}
+	return;
+}

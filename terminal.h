@@ -6,12 +6,6 @@
 #define TERMINAL_H
 
 /*
- * Print the argument in the terminal
- * return to the line after
- */
-void terminal_write(char * string);
-
-/*
  * Request an awnser from the user
  */
 char * terminal_ask(char * string);
