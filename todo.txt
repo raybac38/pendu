@@ -1,0 +1,9 @@
+
+Add a by-pass mode when word is pass like an argument
+
+Separate dico_io.c into two
+
+dico.c => structur of a dictionary
+
+fileio.c => interaction with the file system
+

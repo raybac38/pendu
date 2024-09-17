@@ -1,6 +1,8 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "./string.h"
 #include "./constant.h"
 
 char * terminal_ask(char * string)
@@ -21,7 +23,9 @@ char * terminal_ask(char * string)
 		exit(EXIT_FAILURE);
 	}
 
-	fprintf(stdout, "%s\n", answer);
+	// Replace the last chararcter from \n to \0
+	
+	int len = string_get_length(answer);
+	answer[len - 1] = '\0';
 	return answer;
 }
-

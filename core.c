@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "./dico_io.h"
 #include "./string.h"
@@ -43,8 +44,6 @@ void core_start_game(void)
 	{
 		//gameplay loop
 		
-
-
 		fprintf(stdout, "your word is %s\n", showed_word);
 		fprintf(stdout, "you have %i try left\n", turn);
 
@@ -53,6 +52,7 @@ void core_start_game(void)
 		if(string_get_length(answer) == 1)
 		{
 			// this is a chararcter
+			
 			char character = *answer;
 			int occurences = string_count_character_occurences(answer, character);
 
@@ -71,7 +71,7 @@ void core_start_game(void)
 			}
 		}
 		
-		
+		free(answer);	
 		//if letter 
 		//	need to detecte if the letter is in the word
 		//	YES => change all "-" by the letter
@@ -88,8 +88,19 @@ void core_start_game(void)
 	
 	}
 
+	if(score == hidden_score)
+	{
+		fprintf(stdout, "Congratulation, %s is the correct word ! \n", hidden_word);
+	}
+	else
+	{
+		fprintf(stdout, "Sorry, the word was %s \n Better luck next time \n", hidden_word);
+	}
 
-
+	/// Cleanup because you don't have 1To of RAM
+	
+	free(hidden_word);
+	free(showed_word);
 	
 
 

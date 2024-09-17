@@ -5,6 +5,7 @@
 
 #define DEFAULT_HIDER_CHAR '-'
 
+#define DEFAULT_DICTIONARY_FOLDER "./dictionary/"
 #endif
 
 

@@ -1,6 +1,7 @@
+#ifndef STRING_H
+#define STRING_H
 
-/*
- * This function initialise a word with the required size + '\0'
+ /* This function initialise a word with the required size + '\0'
  * set all char to value (prevent \0 to be in)
  */
 char * string_init_word(int size, char value);
@@ -29,3 +30,10 @@ int string_count_character_occurences(char * string, char character);
 
 void string_reveal_occurences(char * string1, char character, char * string2);
 
+/*
+ * This function concatenate 2 char * into 1
+ * all argument are NOT free ! 
+ */
+char * string_concatenate(char * string1, char * string2);
+
+#endif

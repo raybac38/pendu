@@ -1,5 +1,5 @@
 /*
- *	The purpose of this script is to provide easy-to-use functions for communication with the user via terminal
+ * The purpose of this script is to provide easy-to-use functions for communication with the user via terminal
  */
 
 #ifndef TERMINAL_H

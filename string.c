@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -67,3 +68,22 @@ void string_reveal_occurences(char * string1, char character, char * string2)
 	}
 	return;
 }
+
+char * string_concatenate(char * string1, char * string2)
+{
+	int len = string_get_length(string1) + string_get_length(string2);
+	char * str = malloc(sizeof(char) * len);
+	char * ptr = str;
+
+	while(*string1)
+	{
+		*ptr++ = *string1++
+	}
+	while(*string2)
+	{
+		*ptr++ = *string2++;
+	}
+	*ptr = '\0';
+	return ptr;
+}
+

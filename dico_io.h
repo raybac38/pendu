@@ -13,7 +13,11 @@
 
 int dico_init(void);
 
-
+/*
+ * Try to open a dictionary
+ * return 0 if dictionary is open
+ * return 1 if failed to open dictionary
+ */
 int dico_open(char * name);
 
 
@@ -23,4 +27,6 @@ int dico_open(char * name);
  */
 
 char * dico_get_random_word();
+
+
 

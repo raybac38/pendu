@@ -8,7 +8,7 @@ OPTIMIZE_CFLAG= -O2
 CFLAG=
 
 # .SILENT => doesn't print command at execution
-.SILENT: 
+#.SILENT: 
 # .PHONY => allow to use multiple time this (doens't check target)
 .PHONY: clean
 
