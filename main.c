@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "./core.h"
 #include "./dico_io.h"
@@ -7,8 +8,11 @@
 #include "./terminal.h"
 #include "./string.h"
 
+void dictionary_manager(void);
+
 int main(int argc, char ** argv)
 {
+	srand(time(NULL));
 	fprintf(stdout, "Jeu du pendu\n\n");
 	
 	while(1)
@@ -21,7 +25,8 @@ int main(int argc, char ** argv)
 		}
 		else if(string_is_equal(answer, "dictionary"))
 		{
-			//Dictionary manager				
+			//Dictionary manager
+			dictionary_manager();				
 		}
 		else if(string_is_equal(answer, "credits"))
 		{
@@ -43,3 +48,67 @@ int main(int argc, char ** argv)
 	}
 }
 
+void dictionary_manager()
+{
+	// list all dictionary
+	// create a new dictionary
+	// add word to a dictionary
+	// remove word to a dictionary
+	// back
+	
+	while (1)
+	{
+		fprintf(stdout, "\n\nDictionary Manager \n\n");
+		fprintf(stdout, "\tlist   => list all available dictionary\n");
+		fprintf(stdout, "\tcreate => create a new dictionary\n");
+		fprintf(stdout, "\terase  => erase a dictionary\n");
+		fprintf(stdout, "\tadd    => add a word to a dictionarry\n");
+		fprintf(stdout, "\tremove => remove a word to a dictionary\n");
+		fprintf(stdout, "\tback   => go back to the main menu\n");
+		char * answer = terminal_ask("");
+	
+		if(string_is_equal(answer, "list"))
+		{
+			system("ls -p | grep -v /");
+		}
+		if(string_is_equal(answer, "create"))
+		{
+			char * name = terminal_ask("dictionary name ? ");
+			int res = dico_create_empty(name);
+			if(!res)
+			{
+				fprintf(stdout, "Sorry, Unable to create a new dictionary\nSee stderr for more info\n");
+			}
+			free(name);
+		}
+		if(string_is_equal(answer, "erase"))
+		{
+			char * name = terminal_ask("dictionary name ? ");
+			dico_erase(name);
+			free(name);
+		}
+		if(string_is_equal(answer, "add"))
+		{
+
+		}
+		if(string_is_equal(answer, "remove"))
+		{
+			
+		}
+		if(string_is_equal(answer, "back"))
+		{
+			return ;
+		}
+
+	}
+
+}
+void AddWord(char * dico_name)
+{
+	
+}
+
+void RemoveWord(char * dico_name)
+{
+
+}

@@ -38,5 +38,24 @@ int dico_read(char * filename);
 
 char * dico_get_random_word();
 
+/*
+ * Check and return a list of all dictionary available
+ */
+int dico_find_dictionary(char ** list);
+
+/*
+ * Create a new empty dictionary
+ * return 0 is succeded
+ * return 1 is unable
+ */
+
+int dico_create_empty(char * name);
+
+/*
+ * Erase a dictionary
+ */
+
+void dico_erase(char * name);
+
 
 #endif

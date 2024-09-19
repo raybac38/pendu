@@ -32,6 +32,7 @@ void string_reveal_occurences(char * string1, char character, char * string2);
 
 /*
  * This function concatenate 2 char * into 1
+ * This function WILL malloc the new string
  * all argument are NOT free ! 
  */
 char * string_concatenate(char * string1, char * string2);

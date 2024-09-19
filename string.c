@@ -72,7 +72,7 @@ void string_reveal_occurences(char * string1, char character, char * string2)
 char * string_concatenate(char * string1, char * string2)
 {
 	int len = string_get_length(string1) + string_get_length(string2);
-	char * str = malloc(sizeof(char) * len);
+	char * str = malloc(sizeof(char) * (len + 1 ));
 	char * ptr = str;
 
 	while(*string1)

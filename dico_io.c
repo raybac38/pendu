@@ -10,12 +10,10 @@ FILE * f = NULL;
 char ** dico = NULL;
 int dico_size = 0;
 
+
 char * dico_get_random_word()
 {
-	srand(time(NULL));
-
 	int index = rand() % dico_size;	
-
 	return *(dico + index);
 }
 
@@ -84,5 +82,40 @@ int dico_read(char *filename)
 	}
 	return 0;
 }
+
+int dico_create_empty(char * name)
+{
+	FILE * f = NULL;
+
+	char * fullname = string_concatenate(DEFAULT_DICTIONARY_FOLDER, name);
+	
+	f = fopen(fullname, "w");
+	if(f == NULL)
+	{
+		fprintf(stderr, "Unable to write a new empty folder");
+		return 2;
+	}
+	fclose(f);
+
+	fprintf(stdout, "new dictionary succesfully created\n");
+	free(fullname);
+	return 0;
+
+}
+
+void dico_erase(char * name)
+{
+	char * fullname = string_concatenate(DEFAULT_DICTIONARY_FOLDER, name);
+	char * cmd = string_concatenate("rm ", fullname);
+	system(cmd);
+	fprintf(stdout, "Dictionary erased\n");
+	free(fullname);
+	free(cmd);
+	return;
+}
+
+
+
+
 
 

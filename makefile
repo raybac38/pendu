@@ -18,6 +18,8 @@ EXEC_RELEASE= main
 
 all: debug release
 
+OBJECT= main.o core.o terminal.o dico_io.o string.o
+
 # set CFLAG with the correct flag
 debug: CFLAG = $(DEBUG_CFLAG)
 debug: $(EXEC_DEBUG)
@@ -26,14 +28,17 @@ release: CFLAG = $(OPTIMIZE_CFLAG)
 release: $(EXEC_RELEASE)
 
 # compile
-$(EXEC_DEBUG): main.o core.o terminal.o dico_io.o string.o
+$(EXEC_DEBUG): $(OBJECT)
 	$(CC) $(CFLAG) -o $@ $^
 	echo "debug compiled"
 
 
-$(EXEC_RELEASE): main.o core.o terminal.o dico_io.o string.o
+$(EXEC_RELEASE): $(OBJECT)
 	$(CC) $(CFLAG) -o $@ $^
 	echo "release compiled"
+
+%.o: %.c
+	$(CC) $(CFLAG) -c $< -o $@
 
 # lazy dev => auto clean :D
 # remove all generated files
