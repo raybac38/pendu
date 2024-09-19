@@ -77,13 +77,13 @@ char * string_concatenate(char * string1, char * string2)
 
 	while(*string1)
 	{
-		*ptr++ = *string1++
+		*ptr++ = *string1++;
 	}
 	while(*string2)
 	{
 		*ptr++ = *string2++;
 	}
 	*ptr = '\0';
-	return ptr;
+	return str;
 }
 

@@ -6,7 +6,8 @@
 #define TERMINAL_H
 
 /*
- * Request an awnser from the user
+ * Request an anwser from the user
+ * This function will malloc
  */
 char * terminal_ask(char * string);
 

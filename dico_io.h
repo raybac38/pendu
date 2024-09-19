@@ -1,6 +1,15 @@
+#ifndef DICO_IO_H
+#define DICO_IO_H
+
 /*
  * The purpose of this script is to provide an API interacting with dictionaries
  */
+
+typedef struct s_dico
+{
+	int size;
+	char ** data;
+} s_dico;
 
 /*
  * This function will try to detecte the folder ./dictionary
@@ -16,9 +25,10 @@ int dico_init(void);
 /*
  * Try to open a dictionary
  * return 0 if dictionary is open
- * return 1 if failed to open dictionary
+ * return !0 if failed to open dictionary
+ * 	(give a error code)
  */
-int dico_open(char * name);
+int dico_read(char * filename);
 
 
 /*
@@ -29,4 +39,4 @@ int dico_open(char * name);
 char * dico_get_random_word();
 
 
-
+#endif
