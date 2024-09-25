@@ -1,47 +1,33 @@
 
+DEBUG ?= y
+
 #set the compiler variable (by default gcc)
 CC= gcc
 
 #compilation flags variable
-DEBUG_CFLAG= -g -Wall
-OPTIMIZE_CFLAG= -O2
-CFLAG=
+ifeq ($(DEBUG),y)
+	CFLAG= -g -Wall 
+else
+	CFLAG= -O2
+endif
 
-# .SILENT => doesn't print command at execution
-#.SILENT: 
-# .PHONY => allow to use multiple time this (doens't check target)
-.PHONY: clean
+BUILD_DIR=./build
 
 # different name for the programme
-EXEC_DEBUG= main_d
-EXEC_RELEASE= main
+EXEC= $(BUILD_DIR)/main
 
-all: debug release
+OBJECT = $(BUILD_DIR)/main.o $(BUILD_DIR)/core.o $(BUILD_DIR)/terminal.o $(BUILD_DIR)/dico_io.o $(BUILD_DIR)/string.o
 
-OBJECT= main.o core.o terminal.o dico_io.o string.o
+all: $(EXEC)
 
-# set CFLAG with the correct flag
-debug: CFLAG = $(DEBUG_CFLAG)
-debug: $(EXEC_DEBUG)
-
-release: CFLAG = $(OPTIMIZE_CFLAG)
-release: $(EXEC_RELEASE)
-
-# compile
-$(EXEC_DEBUG): $(OBJECT)
-	$(CC) $(CFLAG) -o $@ $^
-	echo "debug compiled"
-
-
-$(EXEC_RELEASE): $(OBJECT)
-	$(CC) $(CFLAG) -o $@ $^
-	echo "release compiled"
-
-%.o: %.c
-	$(CC) $(CFLAG) -c $< -o $@
+$(EXEC): $(OBJECT)
+	$(CC) $(CFLAG) -o $(EXEC) $(OBJECT)
+	
+$(BUILD_DIR)/%.o: %.c 
+	$(CC) $(CFLAGS) -c $< -o $@
 
 # lazy dev => auto clean :D
 # remove all generated files
 clean:
-	rm ./*.o $(EXEC_DEBUG) $(EXEC_RELEASE)
-	echo "all compiled code removed"
+	-@rm ./$(BUILD_DIR)/*
+	@echo "all compiled code removed"

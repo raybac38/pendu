@@ -50,3 +50,10 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+
+# ECLIPSE 
+build/
+.cproject
+.project
+.settings/
