@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <errno.h>
 
 #include "./string.h"
 #include "./constant.h"
@@ -17,6 +18,14 @@ char * dico_get_random_word()
 	return *(dico + index);
 }
 
+void dico_null_pointer()
+{
+	int starting_index = dico_size;
+	for (int index = starting_index; index < DEFAULT_DICO_SIZE; index ++)
+	{
+		dico[index] = NULL;
+	}
+}
 
 int dico_read(char *filename)
 {
@@ -80,6 +89,8 @@ int dico_read(char *filename)
 	{
 		free(line);
 	}
+
+	dico_null_pointer();
 	return 0;
 }
 
@@ -88,16 +99,16 @@ int dico_create_empty(char * name)
 	FILE * f = NULL;
 
 	char * fullname = string_concatenate(DEFAULT_DICTIONARY_FOLDER, name);
-	
-	f = fopen(fullname, "w");
+	fprintf(stdout, "%s\n", fullname);
+	f = fopen(fullname, "w+");
 	if(f == NULL)
 	{
-		fprintf(stderr, "Unable to write a new empty folder");
 		return 2;
 	}
 	fclose(f);
 
 	fprintf(stdout, "new dictionary succesfully created\n");
+
 	free(fullname);
 	return 0;
 
@@ -114,6 +125,75 @@ void dico_erase(char * name)
 	return;
 }
 
+//FUNCTION WILL CREATE A COPY
+void dico_add_word(char * word)
+{
+	if(dico_size == DEFAULT_DICO_SIZE)
+	{
+		return;
+	}
+	char ** ptr = dico;
+	while(*ptr++) {}
+
+	char * copy = string_copy(word);
+
+	*ptr = copy;
+
+	dico_size ++;
+	return;
+}
+
+void dico_remove_word(char * word)
+{
+	char ** ptr = dico;
+	int countdown = DEFAULT_DICO_SIZE;
+
+	while(!string_is_equal(*ptr, word) && countdown)
+	{
+		ptr ++;
+		countdown--;
+	}
+	if(!countdown)
+	{
+		fprintf(stdout, "Cannot find your word\n");
+		return;
+	}
+	printf("%s\n", *ptr);
+	free(*ptr);
+	dico_size--;
+	*ptr = NULL;
+}
+
+int dico_write(char * filename)
+{
+	if(dico == NULL)
+	{
+		fprintf(stderr, "Unable to find dico raw data\n");
+		return 1;
+	}
+
+	char * fullname = string_concatenate(DEFAULT_DICTIONARY_FOLDER, filename);
+	f = fopen(fullname, "w");
+	if(f == NULL)
+	{
+		fprintf(stderr, "Unable to open dictionary");
+		return 1;
+	}
+
+	char ** ptr = dico;
+
+	while(dico_size != 0)
+	{
+		if(*ptr == NULL)
+		{
+			fprintf(f, "%s\n", *ptr);
+			dico_size--;
+		}
+		ptr++;
+	}
+	free(fullname);
+	fclose(f);
+}
 
 
 

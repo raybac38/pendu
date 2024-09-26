@@ -57,5 +57,21 @@ int dico_create_empty(char * name);
 
 void dico_erase(char * name);
 
+/*
+ * Add a word to current dico
+ */
+
+void dico_add_word(char * word);
+
+/*
+ * Remove a word to current dico
+ */
+
+void dico_remove_word(char * word);
+
+/*
+ * Wite data on a dictionary
+ */
+int dico_write(char * filename);
 
 #endif

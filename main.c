@@ -17,7 +17,7 @@ int main(int argc, char ** argv)
 	
 	while(1)
 	{
-		char * answer = terminal_ask("\tPlay\n\tDictionary\n\tCredits\n\tQuit\n");
+		char * answer = terminal_ask("\tPlay\n\tDictionary (unfinished)\n\tCredits\n\tQuit\n");
 		if(string_is_equal(answer, "play"))
 		{
 			dico_read(DEFAULT_DICTIONARY_NAME);
@@ -48,6 +48,79 @@ int main(int argc, char ** argv)
 	}
 }
 
+void add_word_protocol()
+{
+	char * dico_name = terminal_ask("dictionary name ?");
+	int return_code = dico_read(dico_name);
+	if(return_code != 0)
+	{
+		fprintf(stdout, "Unable to open this dictionary\n");
+		if(dico_name != NULL)
+		{
+			free(dico_name);
+		}
+		return;
+	}
+
+	//Dictionary, have been read
+
+	while(1)
+	{
+		fprintf(stdout, "Write and enter to add a word\n Enter nothing to go back\n");
+		char * word = terminal_ask("What word do you want to add ?");
+		if(string_get_length(word) < 1)
+		{
+			free(word);
+			fprintf(stdout, "return to dictionary ... \n");
+			break;
+		}
+		dico_add_word(word);
+		fprintf(stdout, "Word added\n");
+		free(word);
+
+	}
+
+	dico_write(dico_name);
+	fprintf(stdout, "dico writed\n");
+	free(dico_name);
+}
+
+void remove_word_protocol()
+{
+	char * dico_name = terminal_ask("dictionary name ?");
+	int return_code = dico_read(dico_name);
+	if(return_code != 0)
+	{
+		fprintf(stdout, "Unable to open this dictionary\n");
+		if(dico_name != NULL)
+		{
+			free(dico_name);
+		}
+		return;
+	}
+
+	//Dictionary, have been read
+
+	while(1)
+	{
+		fprintf(stdout, "Write and enter to remove if matching a word\n Enter nothing to go back\n");
+		char * word = terminal_ask("What word do you want to remove ?");
+		if(string_get_length(word) < 1)
+		{
+			free(word);
+			fprintf(stdout, "return to dictionary ... \n");
+			break;
+		}
+		dico_remove_word(word);
+		fprintf(stdout, "Word removed");
+		free(word);
+
+	}
+	dico_write(dico_name);
+	free(dico_name);
+}
+
+
 void dictionary_manager()
 {
 	// list all dictionary
@@ -69,11 +142,13 @@ void dictionary_manager()
 	
 		if(string_is_equal(answer, "list"))
 		{
-			system("ls -p | grep -v /");
+			system("ls ./dictionary/");
 		}
 		if(string_is_equal(answer, "create"))
 		{
+
 			char * name = terminal_ask("dictionary name ? ");
+			fprintf(stdout, "%s\n", name);
 			int res = dico_create_empty(name);
 			if(!res)
 			{
@@ -89,26 +164,17 @@ void dictionary_manager()
 		}
 		if(string_is_equal(answer, "add"))
 		{
-
+			add_word_protocol();
 		}
 		if(string_is_equal(answer, "remove"))
 		{
-			
+			remove_word_protocol();
 		}
 		if(string_is_equal(answer, "back"))
 		{
-			return ;
+			return;
 		}
 
 	}
-
-}
-void AddWord(char * dico_name)
-{
-	
-}
-
-void RemoveWord(char * dico_name)
-{
 
 }

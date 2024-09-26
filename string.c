@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "./constant.h"
+
 int string_get_length(char * string)
 {
 	int size = 0;
@@ -87,3 +89,18 @@ char * string_concatenate(char * string1, char * string2)
 	return str;
 }
 
+char * string_copy(char * ref)
+{
+	char * copy = malloc(sizeof(char) * (MAX_WORD_SIZE + 1));
+	if (copy == NULL)
+	{
+		fprintf(stderr, "Unable to malloc more memory\n");
+		exit(EXIT_FAILURE);
+	}
+
+	char *ptr = copy;
+
+	while(*ptr++ = *ref++){}
+	*ptr = 0;
+	return copy;
+}

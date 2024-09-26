@@ -12,6 +12,13 @@ char * string_init_word(int size, char value);
 int string_get_length(char * string);
 
 /*
+ * Copy a string
+ * @return copied string
+ */
+
+char * string_copy(char * ref);
+
+/*
  * Compare two string
  * @return 1 if equal, 0 if inequal
  */

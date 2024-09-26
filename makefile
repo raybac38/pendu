@@ -14,7 +14,7 @@ endif
 BUILD_DIR=./build
 
 # different name for the programme
-EXEC= $(BUILD_DIR)/main
+EXEC= main
 
 OBJECT = $(BUILD_DIR)/main.o $(BUILD_DIR)/core.o $(BUILD_DIR)/terminal.o $(BUILD_DIR)/dico_io.o $(BUILD_DIR)/string.o
 
@@ -29,5 +29,5 @@ $(BUILD_DIR)/%.o: %.c
 # lazy dev => auto clean :D
 # remove all generated files
 clean:
-	-@rm ./$(BUILD_DIR)/*
+	-@rm ./$(BUILD_DIR)/* $(EXEC)
 	@echo "all compiled code removed"
